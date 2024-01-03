@@ -1,0 +1,53 @@
+version: '3.9'
+
+services:
+  projeto-nginx:
+    build: ./docker/nginx
+    container_name: projeto-nginx
+    ports:
+      - 4004:80
+    depends_on:
+      - projeto-php
+
+  projeto-php:
+    build: ./docker/php
+    container_name: projeto-php
+    working_dir: /var/www/app
+    privileged: true
+    command: sh -c "composer install && php bin/hyperf.php server:watch"
+    volumes:
+      - ./:/var/www/app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "default.localhost:host-gateway"
+    depends_on:
+      - projeto-db
+      - projeto-redis
+      
+  projeto-db:
+    image: mysql:8.2.0
+    container_name: projeto-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'projeto'
+      MYSQL_USER: 'projeto'
+      MYSQL_PASSWORD: 'projeto'
+      MYSQL_ROOT_PASSWORD: 'projeto'
+    ports:
+      - '3306:3306'
+    volumes: 
+      - ./storage/db/:/var/lib/mysql
+
+  projeto-redis:
+    image: redis:7.2.3-alpine
+    container_name: projeto-redis
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 60 1 --loglevel warning
+    volumes: 
+      - ./storage/cache/:/data
+
+volumes:
+  cache:
+    driver: local

@@ -11,34 +11,27 @@ declare(strict_types=1);
  */
 return [
     'generator' => [
-        'amqp' => [
-            'consumer' => [
-                'namespace' => 'App\\Amqp\\Consumer',
-            ],
-            'producer' => [
-                'namespace' => 'App\\Amqp\\Producer',
-            ],
-        ],
-        'aspect' => [
-            'namespace' => 'App\\Aspect',
-        ],
         'command' => [
-            'namespace' => 'App\\Command',
-        ],
-        'controller' => [
-            'namespace' => 'App\\Controller',
+            'namespace' => 'Application\\Command',
         ],
         'job' => [
-            'namespace' => 'App\\Job',
+            'namespace' => 'Application\\Job',
         ],
         'listener' => [
-            'namespace' => 'App\\Listener',
+            'namespace' => 'Application\\Listener',
+        ],
+        'controller' => [
+            'namespace' => 'Application\\Http\\Controller',
         ],
         'middleware' => [
-            'namespace' => 'App\\Middleware',
+            'namespace' => 'Application\\Http\\Middleware',
         ],
-        'Process' => [
-            'namespace' => 'App\\Processes',
+        'request' => [
+            'namespace' => 'Application\\Http\\Request',
         ],
+        'resource' => [
+            'namespace' => 'Application\\Http\\Resource',
+        ],
+        
     ],
 ];

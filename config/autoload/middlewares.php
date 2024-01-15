@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 return [
     'http' => [
-        \Hyperf\Tracer\Middleware\TraceMiddleware::class,
+        \Hyperf\Validation\Middleware\ValidationMiddleware::class,
+        //\Hyperf\Tracer\Middleware\TraceMiddleware::class,
     ],
 ];

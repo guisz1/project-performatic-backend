@@ -1,6 +1,9 @@
 <?php
 
 declare(strict_types=1);
+
+use Application\Listener\ExchangeRegisteredListener;
+
 /**
  * This file is part of Hyperf.
  *
@@ -12,4 +15,5 @@ declare(strict_types=1);
 return [
     Hyperf\ExceptionHandler\Listener\ErrorExceptionHandler::class,
     Hyperf\Command\Listener\FailToHandleListener::class,
+    ExchangeRegisteredListener::class,
 ];

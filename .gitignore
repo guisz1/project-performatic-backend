@@ -12,4 +12,6 @@ vendor/
 .phpunit*
 *.cache
 .vscode/
-storage/
+storage/db/*
+storage/cache/*
+storage/logs/*

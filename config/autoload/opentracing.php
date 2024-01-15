@@ -14,6 +14,7 @@ use Zipkin\Samplers\BinarySampler;
 use function Hyperf\Support\env;
 
 return [
+    /*
     'default' => env('TRACER_DRIVER', 'zipkin'),
     'enable' => [
         'guzzle' => env('TRACER_ENABLE_GUZZLE', false),
@@ -56,5 +57,5 @@ return [
             'db.statement' => 'db.statement',
             'db.query_time' => 'db.query_time',
         ],
-    ]
+    ]*/
 ];

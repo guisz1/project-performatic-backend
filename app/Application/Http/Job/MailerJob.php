@@ -30,7 +30,7 @@ class MailerJob extends Job
             return false;
         }
 
-        echo ("email enviado para " . $this->params["to_id"]);
+        var_dump("email enviado para " . $this->params["to_id"]);
         return true;
     }
 }

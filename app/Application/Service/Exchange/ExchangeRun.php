@@ -4,9 +4,12 @@ namespace Application\Service\Exchange;
 
 use Application\Constants\ErrorCode;
 use Application\Exception\BusinessException;
+use Application\Service\Mailer\CallSender;
+use Application\Service\Mailer\SendEmail;
 use Core\Enums\TransferStatus;
 use Core\Repositories\AccountRepository;
 use Core\Repositories\ExchangeRepository;
+use Hyperf\Di\Annotation\Inject;
 
 class ExchangeRun
 {
@@ -36,6 +39,11 @@ class ExchangeRun
             $exchange->save();
             throw new BusinessException(ErrorCode::LOCKED_ERROR);
         }
-        return true;
+        new CallSender([
+            "to_id" => $exchange->to_id,
+            "amount" => $exchange->amount,
+            "transfer_type" => $exchange->transfer_type
+        ]);
+        return $exchange;
     }
 }

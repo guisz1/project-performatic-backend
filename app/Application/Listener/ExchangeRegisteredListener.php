@@ -15,6 +15,7 @@ class ExchangeRegisteredListener implements ListenerInterface
 {
     #[Inject]
     private ExchangeRun $service;
+
     public function __construct(
         private ExchangeRepository $repository
     ) {
@@ -28,7 +29,7 @@ class ExchangeRegisteredListener implements ListenerInterface
 
     public function process(object $event): void
     {
-        $executed = Db::transaction(function () use ($event) {
+        Db::transaction(function () use ($event) {
             $transfer = $this->repository->getExchangeById($event->transferId);
             $exchanger = new Exchanger(new TransferExecute($transfer));
             return $this->service->run($exchanger->exchange());

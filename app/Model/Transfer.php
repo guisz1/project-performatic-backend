@@ -26,5 +26,5 @@ class Transfer extends Model
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'from_id' => 'integer', 'to_id' => 'integer', 'amount' => 'decimal:2', 'status' => 'string', 'message' => 'string', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected array $casts = ['id' => 'integer', 'from_id' => 'integer', 'transfer_type' => 'string', 'to_id' => 'integer', 'amount' => 'decimal:2', 'status' => 'string', 'message' => 'string', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

@@ -3,6 +3,7 @@
 namespace Application\Service\Exchange;
 
 use Application\Factory\ExchangeInterface;
+use Core\Enums\TransferType;
 use Core\Enums\UserRole;
 use Core\Repositories\AccountRepository;
 use GuzzleHttp\Client;
@@ -24,7 +25,7 @@ class TransferRun implements ExchangeInterface
 
     public function verifyAmount(): bool
     {
-        if ($this->sender->amount >= $this->transfer->amount) {
+        if ($this->sender->amount >= $this->transfer->amount || $this->transfer->transfer_type == TransferType::Deposit->value) {
             return true;
         }
         return false;
@@ -40,7 +41,7 @@ class TransferRun implements ExchangeInterface
 
     public function internalValidation(): bool
     {
-        if ($this->sender->id == $this->receiver->id) {
+        if ($this->sender->id == $this->receiver->id && $this->transfer->transfer_type != TransferType::Deposit->value) {
             return false;
         }
 
